@@ -1,0 +1,13 @@
+name: KMMBridge Android and iOS Publish
+on:
+  workflow_dispatch:
+jobs:
+  call-kmmbridge-publish:
+    permissions:
+      contents: write
+      packages: write
+    uses: touchlab/KMMBridge/.github/workflows/spmbuildpublish.yml@kpg/kmmbridge-1.0
+    with:
+      jvmVersion: 17
+      publishTask: kmmBridgePublish publishKotlinMultiplatformPublicationToGitHubPackagesRepository publishAndroidDebugPublicationToGitHubPackagesRepository publishAndroidReleasePublicationToGitHubPackagesRepository
+      versionProperty: LIBRARY_VERSION
