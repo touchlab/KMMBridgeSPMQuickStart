@@ -63,8 +63,8 @@ val LIBRARY_VERSION:String by project
 
 dependencies {
     if (remoteBuild) {
-        implementation("${GROUP}:analytics-android-debug:${LIBRARY_VERSION}.+")
-        implementation("${GROUP}:breeds-android-debug:${LIBRARY_VERSION}.+")
+        implementation("${GROUP}:analytics-android-debug:${LIBRARY_VERSION}")
+        implementation("${GROUP}:breeds-android-debug:${LIBRARY_VERSION}")
     } else {
         implementation(project(":analytics"))
         implementation(project(":breeds"))
