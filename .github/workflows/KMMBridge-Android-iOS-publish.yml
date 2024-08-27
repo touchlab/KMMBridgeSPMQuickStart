@@ -5,7 +5,7 @@ on:
 jobs:
   kmmbridgepublish:
     concurrency: "kmmbridgepublish-${{ github.repository }}"
-    runs-on: ${{ inputs.runsOn }}
+    runs-on: macos-latest
     steps:
       - name: Checkout the repo with tags
         uses: actions/checkout@v4
