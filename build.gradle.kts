@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.cocoapods) apply false
     alias(libs.plugins.sqlDelight) apply false
     alias(libs.plugins.skie) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }
 
 subprojects {

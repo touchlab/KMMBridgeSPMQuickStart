@@ -5,27 +5,27 @@ targetSdk = "34"
 compileSdk = "34"
 
 # Dependencies
-kotlin = "1.9.23"
+kotlin = "2.0.10"
 kmmBridge = "1.0.0"
 android-gradle-plugin = "8.2.0"
-coroutines = "1.8.0"
-kotlinx-datetime = "0.5.0"
-ktor = "2.3.9"
+coroutines = "1.8.1"
+kotlinx-datetime = "0.6.0"
+ktor = "2.3.12"
 
-stately = "2.0.6"
-kermit = "2.0.3"
-skie = "0.6.2"
+stately = "2.0.7"
+kermit = "2.0.4"
+skie = "0.8.4"
 
 multiplatformSettings = "1.1.1"
-sqlDelight = "2.0.1"
+sqlDelight = "2.0.2"
 
-compose = "1.5.4"
-composeCompiler = "1.5.8"
+compose = "1.6.8"
+composeCompiler = "1.5.15"
 
 # Sample - Android
-androidx-core = "1.12.0"
-androidx-lifecycle = "2.7.0"
-androidx-activity-compose = "1.8.2"
+androidx-core = "1.13.1"
+androidx-lifecycle = "2.8.4"
+androidx-activity-compose = "1.9.1"
 android-desugaring = "2.0.4"
 koin = "3.5.3"
 
@@ -84,6 +84,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
 kmmbridge = { id = "co.touchlab.kmmbridge", version.ref = "kmmBridge" }
 cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-logging", "ktor-client-serialization", "ktor-client-contentNegotiation"]
