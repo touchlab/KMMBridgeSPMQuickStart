@@ -14,5 +14,6 @@ build
 *.xcbkptlist
 !/.idea/codeStyles/*
 !/.idea/inspectionProfiles/*
+.kotlin
 
 .swiftpm
