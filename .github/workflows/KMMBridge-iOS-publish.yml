@@ -2,6 +2,9 @@ name: KMMBridge iOS Publish
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   kmmbridgepublish:
     concurrency: "kmmbridgepublish-${{ github.repository }}"
