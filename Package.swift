@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.8
 import PackageDescription
 
 let packageName = "allshared"
@@ -6,7 +6,7 @@ let packageName = "allshared"
 let package = Package(
     name: packageName,
     platforms: [
-        .iOS(.v13)
+        .iOS(.v14)
     ],
     products: [
         .library(
