@@ -1,7 +1,11 @@
 // swift-tools-version:5.8
 import PackageDescription
 
+// BEGIN KMMBRIDGE VARIABLES BLOCK (do not edit)
+let remoteKotlinUrl = "https://api.github.com/repos/touchlab/KMMBridgeSPMQuickStart/releases/assets/211791191.zip"
+let remoteKotlinChecksum = "efeb1b1b884a34a3fa6898edacd4e5c35959f14e35b22197191506e099c9ae31"
 let packageName = "allshared"
+// END KMMBRIDGE BLOCK
 
 let package = Package(
     name: packageName,
@@ -17,7 +21,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: packageName,
-            path: "./allshared/build/XCFrameworks/debug/\(packageName).xcframework"
+            url: remoteKotlinUrl,
+            checksum: remoteKotlinChecksum
         )
         ,
     ]
