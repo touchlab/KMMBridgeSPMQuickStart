@@ -1,4 +1,4 @@
-name: KMMBridge Android and iOS Publish
+name: KMMBridge-Release
 on:
   workflow_dispatch:
 
