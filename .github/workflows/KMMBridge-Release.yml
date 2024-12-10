@@ -1,9 +1,10 @@
-name: KMMBridge iOS Publish
+name: KMMBridge-Release
 on:
   workflow_dispatch:
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
   kmmbridgepublish:
@@ -46,7 +47,7 @@ jobs:
           key: ${{ runner.os }}-v4-${{ hashFiles('*.gradle.kts') }}
 
       - name: Build Main
-        run: ./gradlew kmmBridgePublish -PENABLE_PUBLISHING=true -PGITHUB_PUBLISH_TOKEN=${{ secrets.GITHUB_TOKEN }} -PGITHUB_REPO=${{ github.repository }} --no-daemon --info --stacktrace
+        run: ./gradlew publishKotlinMultiplatformPublicationToGitHubPackagesRepository publishAndroidDebugPublicationToGitHubPackagesRepository publishAndroidReleasePublicationToGitHubPackagesRepository kmmBridgePublish -PENABLE_PUBLISHING=true -PGITHUB_PUBLISH_TOKEN=${{ secrets.GITHUB_TOKEN }} -PGITHUB_REPO=${{ github.repository }} --no-daemon --info --stacktrace
         env:
           GRADLE_OPTS: -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=512m"
 

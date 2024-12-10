@@ -1,4 +1,4 @@
-name: KMMBridge Android and iOS Publish
+name: KMMBridge-Debug
 on:
   workflow_dispatch:
 
@@ -27,6 +27,11 @@ jobs:
         id: output
         run: echo "${{ steps.versionPropertyValue.outputs.propVal }}"
 
+      - id: trimcommit
+        uses: prompt/actions-commit-hash@v3
+        with:
+          commit: ${{ github.sha }}
+
       - name: Touchlab Sample Sanity Check (Ignore this for your CI)
         uses: touchlab/sample-group-sanity-check@main
 
@@ -47,13 +52,13 @@ jobs:
           key: ${{ runner.os }}-v4-${{ hashFiles('*.gradle.kts') }}
 
       - name: Build Main
-        run: ./gradlew publishKotlinMultiplatformPublicationToGitHubPackagesRepository publishAndroidDebugPublicationToGitHubPackagesRepository publishAndroidReleasePublicationToGitHubPackagesRepository kmmBridgePublish -PENABLE_PUBLISHING=true -PGITHUB_PUBLISH_TOKEN=${{ secrets.GITHUB_TOKEN }} -PGITHUB_REPO=${{ github.repository }} --no-daemon --info --stacktrace
+        run: ./gradlew kmmBridgePublish -PLIBRARY_VERSION=${{ steps.versionPropertyValue.outputs.propVal }}-${{ steps.trimcommit.outputs.short }} -PENABLE_PUBLISHING=true -PGITHUB_PUBLISH_TOKEN=${{ secrets.GITHUB_TOKEN }} -PGITHUB_REPO=${{ github.repository }} --no-daemon --info --stacktrace
         env:
           GRADLE_OPTS: -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=512m"
 
       - uses: touchlab/ga-update-release-tag@v1
         id: update-release-tag
         with:
-          commitMessage: "KMP SPM package release for ${{ steps.versionPropertyValue.outputs.propVal }}"
-          tagMessage: "KMP release version ${{ steps.versionPropertyValue.outputs.propVal }}"
-          tagVersion: ${{ steps.versionPropertyValue.outputs.propVal }}
+          commitMessage: "KMP SPM package release for ${{ steps.versionPropertyValue.outputs.propVal }}-${{ steps.trimcommit.outputs.short }}"
+          tagMessage: "KMP release version ${{ steps.versionPropertyValue.outputs.propVal }}-${{ steps.trimcommit.outputs.short }}"
+          tagVersion: ${{ steps.versionPropertyValue.outputs.propVal }}-${{ steps.trimcommit.outputs.short }}
