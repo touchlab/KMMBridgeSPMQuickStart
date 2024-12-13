@@ -3,9 +3,11 @@ on:
   workflow_call:
     inputs:
       build-debug:
+        description: If set to true, the Xcode framework is debuggable. For release builds, setting to false produces more optimized binaries.
         required: true
         type: boolean
       publish-tasks:
+        description: By default, the tasks will publish Android AARs and Xcode frameworks. For iOS-only builds, pass in 'kmmBridgePublish'.
         required: false
         default: "publishKotlinMultiplatformPublicationToGitHubPackagesRepository publishAndroidDebugPublicationToGitHubPackagesRepository publishAndroidReleasePublicationToGitHubPackagesRepository kmmBridgePublish"
         type: string
@@ -16,7 +18,7 @@ permissions:
 
 jobs:
   kmmbridgepublish:
-    concurrency: "kmmbridgepublish-${{ github.repository }}"
+    concurrency: "kmmbridgepublish-${{ github.repository }}" # Potentially not necessary, but helps ensure sequential releases
     runs-on: macos-latest
     steps:
       - name: Checkout the repo with tags
@@ -29,13 +31,13 @@ jobs:
         id: versionPropertyValue
         with:
           file: ./gradle.properties
-          property: LIBRARY_VERSION
+          property: LIBRARY_VERSION # The release version. Defined in gradle.properties.
 
       - name: Print versionPropertyValue
         id: output
         run: echo "${{ steps.versionPropertyValue.outputs.propVal }}"
 
-      - name: Touchlab Sample Sanity Check (Ignore this for your CI)
+      - name: Touchlab Sample Sanity Check (Ignore this for your CI) # GitHub Packages can have issues with conflicting maven coordinates.
         uses: touchlab/sample-group-sanity-check@main
 
       - uses: actions/setup-java@v2
@@ -73,6 +75,8 @@ jobs:
         env:
           GRADLE_OPTS: -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=512m"
 
+      # The GitHub Release hosts the Xcode binary, but we need to query GitHub for the URL after the binary is uploaded,
+      # then generate the Package.swift file. Once that is committed, we need to point the release tag at the final commit.
       - uses: touchlab/ga-update-release-tag@v1
         id: update-release-tag
         with:
