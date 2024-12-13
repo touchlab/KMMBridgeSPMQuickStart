@@ -34,3 +34,9 @@ kmmbridge {
         iOS { v("14") }
     }
 }
+
+skie {
+    build {
+        produceDistributableFramework()
+    }
+}
