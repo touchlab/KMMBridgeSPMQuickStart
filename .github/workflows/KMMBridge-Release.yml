@@ -2,68 +2,8 @@ name: KMMBridge-Release
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-  packages: write
-
 jobs:
-  kmmbridgepublish:
-    concurrency: "kmmbridgepublish-${{ github.repository }}"
-    runs-on: macos-latest
-    steps:
-      - name: Checkout the repo with tags
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          fetch-tags: true
-
-      - uses: touchlab/read-property@0.1
-        id: versionPropertyValue
-        with:
-          file: ./gradle.properties
-          property: LIBRARY_VERSION
-
-      - name: Print versionPropertyValue
-        id: output
-        run: echo "${{ steps.versionPropertyValue.outputs.propVal }}"
-
-      - name: Touchlab Sample Sanity Check (Ignore this for your CI)
-        uses: touchlab/sample-group-sanity-check@main
-
-      - uses: actions/setup-java@v2
-        with:
-          distribution: "adopt"
-          java-version: 17
-
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-
-      - name: Cache build tooling
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.konan
-          key: ${{ runner.os }}-v4-${{ hashFiles('*.gradle.kts') }}
-
-      - name: Create or Find Artifact Release
-        id: devrelease
-        uses: softprops/action-gh-release@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: "${{ steps.versionPropertyValue.outputs.propVal }}"
-
-      - name: Build Main
-        run: |
-          ./gradlew publishKotlinMultiplatformPublicationToGitHubPackagesRepository publishAndroidDebugPublicationToGitHubPackagesRepository publishAndroidReleasePublicationToGitHubPackagesRepository kmmBridgePublish \
-            -PGITHUB_ARTIFACT_RELEASE_ID=${{ steps.devrelease.outputs.id }} -PENABLE_PUBLISHING=true -PGITHUB_PUBLISH_TOKEN=${{ secrets.GITHUB_TOKEN }} -PGITHUB_REPO=${{ github.repository }} \
-            --no-daemon --info --stacktrace
-        env:
-          GRADLE_OPTS: -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=512m"
-
-      - uses: touchlab/ga-update-release-tag@v1
-        id: update-release-tag
-        with:
-          commitMessage: "KMP SPM package release for ${{ steps.versionPropertyValue.outputs.propVal }}"
-          tagMessage: "KMP release version ${{ steps.versionPropertyValue.outputs.propVal }}"
-          tagVersion: ${{ steps.versionPropertyValue.outputs.propVal }}
+  call-publish:
+    uses: ./.github/workflows/KMMBridge-Publish.yml
+    with:
+      build-debug: false
