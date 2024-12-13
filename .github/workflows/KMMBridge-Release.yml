@@ -4,6 +4,6 @@ on:
 
 jobs:
   call-publish:
-    uses: ./.github/workflows/KMMBridge-Publish.yml
+    uses: ./.github/workflows/Base-Publish.yml
     with:
       build-debug: false
