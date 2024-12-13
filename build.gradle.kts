@@ -14,13 +14,9 @@ plugins {
 subprojects {
     val GROUP: String by project
     val LIBRARY_VERSION: String by project
-    val DEV_BUILD: String by project
+
     group = GROUP
-    version = if (DEV_BUILD.toBoolean()) {
-        "$LIBRARY_VERSION-${System.currentTimeMillis()}"
-    } else {
-        LIBRARY_VERSION
-    }
+    version = LIBRARY_VERSION
 }
 
 tasks.register<Delete>("clean") {
