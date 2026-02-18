@@ -1,33 +1,33 @@
 [versions]
 ## SDK Versions
-minSdk = "21"
-targetSdk = "35"
-compileSdk = "35"
+minSdk = "23"
+targetSdk = "36"
+compileSdk = "36"
 
 # Dependencies
-kotlin = "2.1.0"
+kotlin = "2.3.10"
 kmmBridge = "1.2.1"
-android-gradle-plugin = "8.8.0"
-coroutines = "1.10.1"
-kotlinx-datetime = "0.6.1"
-ktor = "3.0.1"
+android-gradle-plugin = "8.12.3"
+coroutines = "1.10.2"
+kotlinx-datetime = "0.7.1"
+ktor = "3.4.0"
 
 stately = "2.1.0"
-kermit = "2.0.5"
-skie = "0.10.0"
+kermit = "2.0.8"
+skie = "0.10.10"
 
-multiplatformSettings = "1.2.0"
-sqlDelight = "2.0.2"
+multiplatformSettings = "1.3.0"
+sqlDelight = "2.2.1"
 
-compose = "1.7.6"
+compose = "1.10.3"
 composeCompiler = "1.5.15"
 
 # Sample - Android
-androidx-core = "1.15.0"
-androidx-lifecycle = "2.8.7"
-androidx-activity-compose = "1.10.0"
-android-desugaring = "2.1.4"
-koin = "4.0.0"
+androidx-core = "1.17.0"
+androidx-lifecycle = "2.10.0"
+androidx-activity-compose = "1.12.4"
+android-desugaring = "2.1.5"
+koin = "4.1.1"
 
 [libraries]
 compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
@@ -76,7 +76,9 @@ android-library = { id = "com.android.library", version.ref = "android-gradle-pl
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
-kmmbridge = { id = "co.touchlab.kmmbridge.github", version.ref = "kmmBridge" }
+kmmbridge = { id = "co.touchlab.kmmbridge", version.ref = "kmmBridge" }
+kmmbridge-github = { id = "co.touchlab.kmmbridge.github", version.ref = "kmmBridge" }
+kmmbridge-spm = { id = "co.touchlab.kmmbridge.spm", version.ref = "kmmBridge" }
 cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

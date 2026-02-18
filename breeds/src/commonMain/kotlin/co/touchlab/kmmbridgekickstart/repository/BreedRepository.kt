@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.datetime.Clock
 import kotlin.random.Random
+import kotlin.time.Clock
 
 class BreedRepository internal constructor(
     private val dbHelper: DatabaseHelper,

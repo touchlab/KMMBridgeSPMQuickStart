@@ -6,8 +6,8 @@ import co.touchlab.kmmbridgekickstart.ktor.DogApiImpl
 import co.touchlab.kmmbridgekickstart.repository.BreedRepository
 import com.russhwolf.settings.Settings
 import io.ktor.client.engine.HttpClientEngine
+import kotlin.time.Clock
 import kotlinx.coroutines.Dispatchers
-import kotlinx.datetime.Clock
 
 internal const val SETTINGS_KEY = "KMMBridgeKickStartSettings"
 internal const val DB_NAME = "KMMBridgeKickStartDb"
