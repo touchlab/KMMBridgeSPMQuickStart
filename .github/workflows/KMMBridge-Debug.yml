@@ -3,12 +3,11 @@ name: KMMBridge-Debug
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-  packages: write
-
 jobs:
   call-publish:
     uses: ./.github/workflows/Base-Publish.yml
+    permissions:
+      contents: write
+      packages: write
     with:
       build-debug: true
