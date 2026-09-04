@@ -6,5 +6,8 @@ on:
 jobs:
   call-publish:
     uses: ./.github/workflows/Base-Publish.yml
+    permissions:
+      contents: write
+      packages: write
     with:
       build-debug: false
